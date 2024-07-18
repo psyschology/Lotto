@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housie Game</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .ticket {
+            border: 1px solid #ffffff;
+            padding: 10px;
+            margin: 5px;
+            width: fit-content;
+        }
+        @import 'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css';
+
+body.dark {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.ticket {
+    background-color: #1e1e1e;
+    border-color: #ffffff;
+    width: fit-content;
+    height: fit-content;
+}
+
+
+    </style>
+</head>
+<body class="dark">
+    <div class="container mx-auto p-4">
+        <!-- Header -->
+        <div class="flex justify-between items-center py-2">
+            <img src="path/to/profile/icon.png" alt="Profile Icon" class="h-10 w-10">
+            <span class="text-xl">Game Status: <span id="game-status">Not Live</span></span>
+        </div>
+        
+        <!-- Game Live Screen -->
+        <div class="bg-gray-800 p-4 my-4 rounded-lg text-center">
+            <h1 class="text-3xl">Game is Not Live</h1>
+            <p>Start Time: <span id="start-time">--:--</span></p>
+            <p>Time Left: <span id="time-left">--:--</span></p>
+        </div>
+        
+        <!-- Tickets -->
+        <div class="grid grid-cols-4 gap-4">
+            <!-- Example ticket -->
+            <div class="ticket bg-gray-700 rounded-lg">
+                <div class="grid grid-cols-10 gap-1 text-center">
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                    <div class="bg-gray-900 p-2">18</div>
+                    <div class="bg-gray-900 p-2">1</div>
+                                      <!-- More numbers... -->
+                </div>
+            </div>
+            <!-- Repeat for more tickets... -->
+        </div>
+    </div>
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const gameStatus = document.getElementById('game-status');
+    const startTime = document.getElementById('start-time');
+    const timeLeft = document.getElementById('time-left');
+
+    // Example: Update game status and time
+    gameStatus.textContent = 'Live';
+    startTime.textContent = '10:00 AM';
+    timeLeft.textContent = '15:00';
+
+    // Additional functionality to update tickets dynamically
+});
+</script>
+</body>
+</html>

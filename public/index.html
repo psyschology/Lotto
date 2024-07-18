@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Housie</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="header-content bg-gray-200 p-4 flex items-center space-x-4">
+                <h1 class="text-2xl font-bold">Daily Housie</h1>
+                <p class="text-lg">Next game starts at 2 PM</p>
+            </div>            
+            <div class="header-actions">
+                <div class="login-dropdown">
+                    <button id="loginBtn">Login</button>
+                    <div class="dropdown-content">
+                        <a href="#" id="agentLoginBtn">Agent</a>
+                        <a href="#" id="adminLoginBtn">Administrator</a>
+                    </div>
+                </div>
+                <button id="purchaseTicketsBtn">Purchase Tickets</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="announcement">
+            <p>Tambola games are for entertainment purposes only. Ensure you understand the rules and regulations before playing.</p>
+        </div>
+        
+        <div class="game-info">
+            <div class="game-time">
+                <p>Next Game Starts At: 2:00 PM</p>
+                <p>Time Left: <span id="countdown-timer"></span></p>
+            </div>
+            <div class="real-time-game">
+                <p>Live Game Display</p>
+            </div>
+        </div>
+
+        <div class="ticket-search">
+            <input type="text" id="search-bar" placeholder="Search Ticket">
+            <button id="search-button">Search</button>
+        </div>
+
+        <div class="tickets" id="tickets">
+            <!-- Tickets will be dynamically generated here -->
+        </div>
+    </main>
+
+    <!-- Agent Login Modal -->
+    <div id="agentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('agentModal')">&times;</span>
+            <h2>Agent Login</h2>
+            <form>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password">
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('adminModal')">&times;</span>
+            <h2>Admin Login</h2>
+            <form>
+                <label for="adminUsername">Username:</label>
+                <input type="text" id="adminUsername" name="adminUsername">
+                <label for="adminPassword">Password:</label>
+                <input type="password" id="adminPassword" name="adminPassword">
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Tambola Game. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
