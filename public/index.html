@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        /* Custom styles for the dropdown */
         .dropdown-content {
             display: none;
             position: absolute;
@@ -16,17 +15,55 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             z-index: 10;
         }
+
         .login-dropdown:hover .dropdown-content {
             display: block;
         }
+
         .dropdown-content a {
             display: block;
             padding: 8px 16px;
             color: #333;
             text-decoration: none;
         }
+
         .dropdown-content a:hover {
             background-color: #f0f0f0;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -44,8 +81,8 @@
                         <img src="./assets/images/login.png" alt="Login" class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14">
                     </button>
                     <div class="dropdown-content absolute right-0 mt-2 w-48">
-                        <a href="#" id="agentLoginBtn" class="block px-4 py-2">Agent</a>
-                        <a href="#" id="adminLoginBtn" class="block px-4 py-2">Administrator</a>
+                        <a href="agentUi/index.html" id="agentLoginBtn" class="block px-4 py-2">Agent</a>
+                        <a href="adminUi/index.html" id="adminLoginBtn" class="block px-4 py-2">Administrator</a>
                     </div>
                 </div>
                 <button id="purchaseTicketsBtn" class="image-button">
@@ -78,11 +115,12 @@
             </div>
         </div>
     </header>
+
     <main>
         <div class="announcement">
             <p>Tambola games are for entertainment purposes only. Ensure you understand the rules and regulations before playing.</p>
         </div>
-        
+
         <div class="game-info">
             <div class="game-time">
                 <p>Next Game Starts At: 2:00 PM</p>
@@ -90,6 +128,54 @@
             </div>
             <div class="real-time-game">
                 <p>Live Game Display</p>
+            </div>
+            <div id="game-board" style="display: none;">
+                <button id="generate-number-btn">Generate New</button>
+                <div id="display-number" class="number-display">0</div>
+                <div class="board">
+                    <!-- Number grid here -->
+                    <div class="grid">
+                        <!-- Generate number grid dynamically or statically -->
+                        <div class="number">1</div>
+                        <div class="number">2</div>
+                        <!-- Continue until 90 -->
+                    </div>
+                </div>
+                <div class="award-status">
+                    <h2>Award Status</h2>
+                    <table>
+                        <tr>
+                            <th>Award</th>
+                            <th>Left</th>
+                            <th>Won By</th>
+                        </tr>
+                        <tr>
+                            <td>First Line</td>
+                            <td>x1</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Second Line</td>
+                            <td>x1</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Third Line</td>
+                            <td>x1</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Corners</td>
+                            <td>x1</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Full House</td>
+                            <td>x1</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
         <div id="number-display" style="display: none;">
@@ -125,36 +211,7 @@
         </div>
     </main>
 
-    <!-- Agent Login Modal -->
-    <div id="agentModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('agentModal')">&times;</span>
-            <h2>Agent Login</h2>
-            <form id="agent-login-form">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password">
-                <button type="submit">Login</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Admin Login Modal -->
-    <div id="adminModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('adminModal')">&times;</span>
-            <h2>Admin Login</h2>
-            <form id="admin-login-form">
-                <label for="adminUsername">Username:</label>
-                <input type="text" id="adminUsername" name="adminUsername">
-                <label for="adminPassword">Password:</label>
-                <input type="password" id="adminPassword" name="adminPassword">
-                <button type="submit">Login</button>
-            </form>
-        </div>
-    </div>
-
+    
     <footer>
         <div class="footer-content">
             <p>&copy; 2024 Tambola Game. All rights reserved.</p>
@@ -163,6 +220,7 @@
 
     <script src="script.js"></script>
     <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-<div class="elfsight-app-b45aa2f0-3c89-4bde-9e37-9ad536aa406b" data-elfsight-app-lazy></div>
+    <div class="elfsight-app-b45aa2f0-3c89-4bde-9e37-9ad536aa406b" data-elfsight-app-lazy></div>
 </body>
+
 </html>
