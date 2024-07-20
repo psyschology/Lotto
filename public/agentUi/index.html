@@ -1,0 +1,761 @@
+<script src="../../../ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="js/home41c3.js?v=53"></script>
+<script src="js/ticketTypeDetector3860.js?v=1"></script>
+
+<div class="gameSettingDiv">
+    <input class="titleBtn" id="webTitleInp" onchange="updateTheme()" style="text-align: center;" value="AGENT DASHBOARD"/>
+    </div>
+
+
+    <!-------------THEMESTORE BUTTON-->
+<br><br>
+<div class="gameSettingDiv">
+    <button class="titleBtn" style="background: yellow;color:black;font-weight: bold;">TOTAL EARNING</button>
+   <a href="https://housielink.com/themeStore"> <button class="runBtn" id="earningBtn">
+    </button></a>
+    <br><br>
+    </div>
+
+
+<div class="gameSettingDiv" style="display: none;">
+<button class="titleBtn" id="titleBtn">GAME INFO</button>
+
+<table class="gameSettingTable" >
+    <tr style="background: black;pointer-events: none;">
+        <th ><input class="tableInp" style="background-color: black;pointer-events: none;margin: 0px;color:white;" value="Settings type"/></th>
+        <th><input class="tableInp" style="background-color:black;pointer-events: none;margin: 0px;color:white;" value="Settings value"/></th>
+    </tr>
+
+    <tr >
+        <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Game date-time"/></th>
+        <th><input class="tableInp" id="dateTimeInp" type="datetime-local" style="background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value=""/></th>
+    </tr>
+
+    <tr>
+        <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Total ticket limit"/></th>
+        <th><input class="tableInp" id="totalTicketInp" type="number" style="background-color:white;pointer-events:none;margin: 0px;color:rgb(0, 0, 0);" value="600"/></th>
+    </tr>
+
+    <tr>
+        <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Ticket price"/></th>
+        <th><input class="tableInp" id="ticketPriceInp" type="number" style="background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="300"/></th>
+    </tr>
+
+    <tr>
+        <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Agent commission"/></th>
+        <th><input class="tableInp" id="agentCommissionInp" type="number" style="background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="50"/></th>
+    </tr>
+
+    <tr>
+        <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Settings type"/></th>
+        <th><select class="tableInp" id="currencyInp" style="background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);">
+        <option value="INR">INR</option>
+        <option value="USD">USD</option>
+        <option value="EURO">EURO</option>
+        </select></th>
+    </tr>
+
+    <tr>
+        <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Website status"/></th>
+        <th><select class="tableInp" id="websiteStatusInp" style="background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);">
+        <option value="on">WE ARE OPEN</option>
+        <option value="off">WE ARE CLOSED</option>
+        </select></th>
+    </tr>
+
+    <tr>
+        <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Booking status"/></th>
+        <th><select class="tableInp" id="bookingStatusInp" style="background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);">
+        <option value="on">BOOKING OPEN</option>
+        <option value="off">BOOKING CLOSED</option>
+        </select></th>
+    </tr>
+</table>
+
+</div>
+
+
+
+
+
+<!---------------------------------------------------------divident list-->
+
+<div class="gameSettingDiv" style="display: none;">
+    <button class="titleBtn">DIVIDENT LIST</button>
+
+    <table class="gameSettingTable">
+        <tr style="background: black;">
+            <th ><input class="tableInp" style="background-color: black;pointer-events: none;margin: 0px;color:white;" value="Divident type"/></th>
+            <th style="width: 40px;"><input class="tableInp"  style="background-color:black;pointer-events: none;margin: 0px;color:white;" value="X"/></th>
+        </tr>
+    
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="First Full House"/></th>
+            <th><input class="tableCheckbox" id="First Housefull" onchange="updateTotalHouseFull(1)" type="checkbox" checked style="background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Second Full House"/></th>
+            <th><input class="tableCheckbox" id="Second Housefull" onchange="updateTotalHouseFull(2)" type="checkbox" style="background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Third Full House"/></th>
+            <th><input class="tableCheckbox" id="Third Housefull" onchange="updateTotalHouseFull(3)" type="checkbox" style="background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="display: none;background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Full Sheet Bonus"/></th>
+            <th><input class="tableCheckbox" id="Full Sheet Bonus" type="checkbox" style="display: none;background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Half Sheet Bonus"/></th>
+            <th><input class="tableCheckbox" id="Half Sheet Bonus" type="checkbox" style="background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Top Line"/></th>
+            <th><input class="tableCheckbox" id="Top Line" type="checkbox" style="background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Middle Line"/></th>
+            <th><input class="tableCheckbox" id="Middle Line" type="checkbox" style="background-color:rgb(196, 180, 180);pointer-events: none;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Bottom Line"/></th>
+            <th><input class="tableCheckbox" id="Bottom Line" type="checkbox" style="background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="display: none;background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Box Bonus"/></th>
+            <th><input class="tableCheckbox" id="Box Bonus" type="checkbox" style="display: none;background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="display: none;background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Corner"/></th>
+            <th><input class="tableCheckbox" id="Corner" type="checkbox" style="display: none;background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Star"/></th>
+            <th><input class="tableCheckbox" id="Star" type="checkbox" style="background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Early 5"/></th>
+            <th><input class="tableCheckbox" id="Early 5" type="checkbox" style="background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="display: none;background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Quick6"/></th>
+            <th><input class="tableCheckbox" id="Quick6" type="checkbox" style="display: none;background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="display: none;background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Quick7"/></th>
+            <th><input class="tableCheckbox" id="Quick7" type="checkbox" style="display: none;background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+       
+        </table>
+        <br><br><br>
+    </div>
+
+
+
+
+<!------------------------------------------------------finance and ticket info info-->
+<br><br>
+<div class="gameSettingDiv">
+    <button class="titleBtn">BUSINESS INFO</button>
+    
+    <table class="gameSettingTable">
+        <tr style="background: black;">
+            <th ><input class="tableInp" style="background-color: black;pointer-events: none;margin: 0px;color:white;" value="Settings type"/></th>
+            <th><input class="tableInp" style="background-color:black;pointer-events: none;margin: 0px;color:white;" value="Settings value"/></th>
+        </tr>
+    
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Total ticket"/></th>
+            <th><input class="tableInp" id="totalTicketInp2" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Sold ticket"/></th>
+            <th><input class="tableInp" id="soldTicketInp" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Total haftsheet booked"/></th>
+            <th><input class="tableInp" id="haftsheetTicketInp" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Total fullsheet booked"/></th>
+            <th><input class="tableInp" id="fullsheetTicketInp" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Ticket left"/></th>
+            <th><input class="tableInp" id="leftTicketInp" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Ticket price"/></th>
+            <th><input class="tableInp" id="ticketPriceInp2" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Agent commission"/></th>
+            <th><input class="tableInp" id="agentCommissionInp2" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Total revenue"/></th>
+            <th><input class="tableInp" id="totalRevenueInp" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Total profit"/></th>
+            <th><input class="tableInp" id="totalProfitInp" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+
+</table>
+<br><br>
+</div>
+
+
+<!------------------------------------------------------admin info-->
+<br>
+<div class="gameSettingDiv">
+    <button class="titleBtn">AGENT INFO</button>
+    
+    <table class="gameSettingTable">
+        <tr style="background: black;">
+            <th ><input class="tableInp" style="background-color: black;pointer-events: none;margin: 0px;color:white;" value="Settings type"/></th>
+            <th><input class="tableInp" style="background-color:black;pointer-events: none;margin: 0px;color:white;" value="Settings value"/></th>
+        </tr>
+    
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Agent name"/></th>
+            <th><input class="tableInp" id="adminNameInp" style="background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value=""/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Agent phone"/></th>
+            <th><input class="tableInp" id="adminPhoneInp"  style="background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value=""/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Agent password"/></th>
+            <th><input class="tableInp" id="adminPassInp" style="background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value=""/></th>
+        </tr>
+
+
+        </table>
+        <br>
+        <input class="bookBtn" type="button" id="logoutBtn"  style="background-color:red;pointer-events: all;color:rgb(255, 255, 255);" onclick="logout()" value="LOG OUT"/>
+        <br>
+        <br><br><br>
+</div>
+
+
+
+
+
+
+<!---------------------------------------------------------ticket/agent list-->
+<br><br>
+<div class="gameSettingDiv">
+    <button class="titleBtn">TICKET/AGENT LIST</button>
+
+    <div class="toggleDiv" style="display: grid;grid-template-columns: auto auto;width: 80%;margin-left: 10%;">
+        <button class="clickBtn" id="showTicketBtn" onclick='getSoldTicket("all","gameSettingTable")' style="background: red;">MY TICKET</button>
+        <button class="clickBtn" id="showAgentBtn" onclick="getAgentList()" style="background: black;">AGENT LIST</button>
+    </div>
+<br>
+    <table class="gameSettingTable" id="gameSettingTable">
+      
+<!----------------------------table list-->
+
+        </table>
+
+
+        <br><br><br>
+        </div>
+
+
+
+
+<!----------------------------------------------------------popup window-->
+
+
+<div class="popWin1" id="popWin1" style="display: none;">
+<div class="win1" style="overflow:scroll;">
+
+    <input class="tableInp" type="button" id="popWin1XBtn" style="background:rgb(255, 255, 0,0);pointer-events: all;margin: 0px;color:white;font-size: 50px;margin-left:40%;" onclick='document.getElementById("popWin1").style.display="none";' value="X"/>
+    
+
+    <table class="gameSettingTable" id="editDataTable">
+
+     <!-------------------------dynamic content-->
+
+        </table>
+
+        <br><br>
+        <table class="gameSettingTable" id="agentTicketTable">
+
+            <!-------------------------dynamic content-->
+       
+       
+               </table>
+    <br><br><br>
+</div>
+</div>
+
+
+
+
+
+<!---------------------------booking window-->
+<div class="gamePopDiv" id="bookingWindowDiv" style="display: none;">
+  
+    <div class="gameDiv">
+        <input class="tableInp" type="button" id="popWin1XBtn" style="background:rgb(255, 255, 0,0);pointer-events: all;margin: 0px;color:white;font-size: 40px;margin-left:40%;position: absolute;" onclick='document.getElementById("bookingWindowDiv").style.display="none";' value="X"/>
+    
+        <button class="titleBtn">SELECT TICKET</button>
+        <br>
+       
+        <div class="bookInpDiv">
+            <input class="tableInp" id="bookerNameInp" placeholder="Name"  style="background-color:rgb(255, 255, 255);pointer-events: nall;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/>
+            <input class="tableInp" id="bookerPhoneInp" placeholder="Phone"  style="background-color:rgb(255, 255, 255);pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/>
+            </div>
+
+            <button class="smallTitleBtn">Random ticket</button>
+            <div class="btnConDiv" id="randomTktDiv">
+               <!---dynamic content-->
+            </div>
+            <button class="smallTitleBtn">Haftsheet ticket</button>
+            <div class="btnConDiv" id="haftsheetTktDiv">
+             <!--dynamic content-->
+            </div>
+            <button class="smallTitleBtn">Fullsheet ticket</button>
+           <div class="btnConDiv" id="fullsheetTktDiv">
+            <!--dynamic content-->
+           </div>
+            <br>
+
+        <div class="ticketBlockDiv" id="ticketBlockDiv">
+            <!-----------------dynamix content from getAllTicket()-->
+        </div>
+        <br>
+        <input class="bookBtn" type="button" id="booktBtn"  style="background-color:red;pointer-events: all;color:rgb(255, 255, 255);" onclick="book()" value="BOOK NOW"/>
+        <br>
+    </div>
+  
+</div>
+
+
+<!--------------------------------login window-->
+<div class="loginOverlayDiv" id="loginOverlayDiv" style="display: none;">
+<div class="loginInpCon">
+    <button class="titleBtn">Login</button>
+    <input class="agentInp" id="agentNameInp" placeholder="Agent name"/>
+    <input class="agentInp" id="agentPassInp" placeholder="Agent pass"/>
+    <input class="agentInp" id="loginBtnInp" onclick="login()" value="SIGN IN" style="background: red;color:white;text-align: center;" type="button"/>
+</div>
+</div>
+
+<!----------------------------------------------------------popup window-->
+
+<!--------------------book btn-->
+<button class="bookFloatBtn" id="bookFloatBtn" onclick='document.getElementById("bookingWindowDiv").style.display="block";' style="display: block;">BOOK TICKET</button>
+
+
+
+
+
+
+<style>
+    .color{
+    color:rgb(0, 131, 219);
+}
+*{
+    outline: none;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+body{
+    background: fixed;
+    background-image: url("../imgAsset/wallpaper.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+   
+}
+.gameSettingDiv{
+    width: 80%;
+    background: rgb(11, 11, 114);
+    margin-left: 10%;
+}
+.titleBtn{
+    width: 100%;
+    border: 0px solid grey;
+    font-size: 30px;
+    padding: 10px;
+    color:white;
+    background: rgba(0,0,0,0);
+}
+.gameSettingTable{
+    width: 80%;
+    margin-left: 10%;
+}
+.tableInp{
+    width: 100%;
+    font-size: 15px;
+    padding: 10px;
+    border: 0px solid grey;
+    font-weight: bold;
+}
+.tableCheckbox{
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+}
+.clickBtn{
+    font-size: 20px;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    border: 0px solid grey;
+    margin:3px;
+}
+.popWin1{
+    position: fixed;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    top: 0px;
+    left:0px;
+    overflow-y:scroll;
+}
+.win1{
+    width: 80%;
+    background:blue;
+    margin-top: 30px;
+    margin-left:10%;
+    border-radius: 10px;
+
+}
+.gamePopDiv{
+    position: fixed;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    top: 0px;
+    left:0px;
+}
+
+.gameDiv{
+    position: fixed;
+    width: 80%;
+    background:blue;
+    margin-top: 30px;
+    margin-left:10%;
+    border-radius: 10px;
+    height: 85%;
+
+}
+.numBlockDiv{
+    width: 50%;
+    margin-left: 25%;
+    border: 10px solid silver;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto ;
+
+}
+.numBtn{
+    font-size: 15px;
+}
+.ticketBlockDiv{
+    width: 80%;
+    border:3px solid white;
+    margin-left: 10%;
+    border-radius: 3px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    max-height: 45%;
+    overflow-y:scroll ;
+}
+.bookInpDiv{
+    width: 80%;
+    margin-left: 10%;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.ticketBlockBtn{
+    font-size: 15px;
+    padding: 5px;
+    background:white;
+    font-weight: bold;
+    border:2px solid silver;
+}
+.bookBtn{
+    width:80%;
+    font-size: 15px;
+    padding: 10px;
+    border: 0px solid grey;
+    font-weight: bold;
+    margin-left: 10%;
+}
+.runBtn{
+    width: 80%;
+    font-size: 40px;
+    font-weight: bold;
+    height: 100px;
+    border-radius: 10px;
+    background: red;
+    color:white;
+    margin-left: 10%;
+    margin-top: 10px;
+    border:0px solid grey;
+}
+.runGameTable{
+    width: 52%;
+    margin-left: 25%;
+}
+.loginOverlayDiv{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+}
+.loginInpCon{
+    width: 50%;
+    height: 50%;
+    background: rgb(0, 197, 223);
+    border: 10px solid rgb(12, 12, 202);
+    margin-left: 25%;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.agentInp{
+    width: 80%;
+    font-size: 18px;
+    padding: 10px;
+    border: 0px solid grey;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-left: 10%;
+}
+.bookFloatBtn{
+    font-size: 20px;
+    padding: 10px;
+    width: 200px;
+    border-radius: 10px;
+    position: fixed;
+    bottom: 10px;
+    border:0px solid grey;
+    background: red;
+    color:white;
+    right:10%;
+}
+.smallTitleBtn{
+    border: 0px solid grey;
+    background: rgba(0, 0, 0, 0);
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    margin-left: 10%;
+}
+.btnConDiv{
+    width: 80%;
+    border-radius: 20px;
+    border: 3px solid white;
+    margin-left: 10%;
+    overflow: auto;
+  white-space: nowrap;
+}
+.roundBtn{
+    border-radius: 15px;
+    width: 30px;
+    height: 30px;
+    font-size: 10px;
+    margin:3px;
+    background: white;
+    border: 0px solid grey;
+}
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 1000px) { 
+    .gameSettingDiv{
+    width: 90%;
+    background: rgb(11, 11, 114);
+    margin-left: 5%;
+}
+.titleBtn{
+    width: 100%;
+    border: 0px solid grey;
+    font-size: 50px;
+    padding: 10px;
+    color:white;
+    background: rgba(0,0,0,0);
+}
+.gameSettingTable{
+    width: 90%;
+    margin-left: 5%;
+}
+.tableInp{
+    width: 100%;
+    font-size: 25px;
+    padding: 10px;
+    border: 0px solid grey;
+    font-weight: bold;
+}
+.tableCheckbox{
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+}
+.clickBtn{
+    font-size: 25px;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    border: 0px solid grey;
+    margin:3px;
+}
+.gameDiv{
+    position: fixed;
+    width: 80%;
+    background:blue;
+    margin-top: 30px;
+    margin-left:10%;
+    border-radius: 10px;
+
+}
+.numBlockDiv{
+    width: 80%;
+    margin-left: 10%;
+    border: 20px solid silver;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto ;
+
+}
+.numBtn{
+    font-size: 35px;
+}
+
+.bookInpDiv{
+    width: 90%;
+    margin-left: 5%;
+    grid-template-columns: auto;
+}
+.ticketBlockDiv{
+    width: 90%;
+    border:3px solid white;
+    margin-left: 5%;
+    border-radius: 3px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    overflow-y:scroll ;
+    max-height: 60%;
+}
+.ticketBlockBtn{
+    font-size: 30px;
+    padding: 10px;
+    background:white;
+    font-weight: bold;
+    border:2px solid silver;
+}
+.bookBtn{
+    width:90%;
+    font-size: 35px;
+    padding: 10px;
+    border: 0px solid grey;
+    font-weight: bold;
+    margin-left: 5%;
+}
+.runGameTable{
+    width: 85%;
+    margin-left: 10%;
+}
+.loginOverlayDiv{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+}
+.loginInpCon{
+    width: 80%;
+    height: 50%;
+    background: rgb(0, 197, 223);
+    border: 10px solid rgb(12, 12, 202);
+    margin-left: 10%;
+    border-radius: 30px;
+    margin-top: 20px;
+}
+.agentInp{
+    width: 80%;
+    font-size: 38px;
+    padding: 20px;
+    border: 0px solid grey;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-left: 10%;
+}
+.bookFloatBtn{
+    font-size: 40px;
+    padding: 20px;
+    width: 400px;
+    border-radius: 10px;
+    position: fixed;
+    bottom: 30px;
+    border:0px solid grey;
+    color:white;
+    right:5%;
+}
+.smallTitleBtn{
+    border: 0px solid grey;
+    background: rgba(0, 0, 0, 0);
+    font-size: 40px;
+    color: white;
+    font-weight: bold;
+    margin-left: 5%;
+}
+.btnConDiv{
+    width: 90%;
+    border-radius: 20px;
+    border: 3px solid white;
+    margin-left: 5%;
+}
+.roundBtn{
+    border-radius: 20px;
+    width: 90px;
+    height: 50px;
+    font-size: 35px;
+    margin:5px;
+    background: white;
+    border: 0px solid grey;
+}
+
+
+}
+
+</style>
+
+
+
+
+
+ 

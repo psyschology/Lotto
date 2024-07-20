@@ -1,0 +1,1356 @@
+<script src="../../../ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../../../cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+<script src="../../../cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+<script src="js/home94f3.js?v=88"></script>
+<script src="js/printPdf.js"></script>
+<script src="js/ticketTypeDetectorfb74.js?v=16"></script>
+<script src="js/filterChar.js"></script>
+<script src="js/audioAnnouncement.js"></script>
+
+<div class="gameSettingDiv">
+    <input class="titleBtn" id="webTitleInp" onchange="updateTheme()" style="text-align: center;" value="ADMIN DASHBOARD" />
+    </div>
+<br>
+
+<div class="gameSettingDiv">
+<button class="titleBtn" id="titleBtn">GAME SETTINGS</button>
+
+<table class="gameSettingTable">
+    <tr style="background: black;">
+        <th ><input class="tableInp" style="background-color: black;pointer-events: none;margin: 0px;color:white;" value="Settings type"/></th>
+        <th><input class="tableInp" style="background-color:black;pointer-events: none;margin: 0px;color:white;" value="Settings value"/></th>
+    </tr>
+
+
+    <tr>
+        <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Game date-time"/></th>
+        <th><input class="tableInp" id="dateTimeInp" type="datetime-local" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" value=""/></th>
+    </tr>
+
+    <tr>
+        <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Total ticket limit (within 600)"/></th>
+        <th><input class="tableInp" id="totalTicketInp" type="number" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value="600"/></th>
+    </tr>
+
+    <tr>
+        <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Ticket price"/></th>
+        <th><input class="tableInp" id="ticketPriceInp" type="number" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value="300"/></th>
+    </tr>
+
+    <tr>
+        <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Agent commission"/></th>
+        <th><input class="tableInp" id="agentCommissionInp" type="number" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value="50"/></th>
+    </tr>
+
+    <tr>
+        <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Settings type"/></th>
+        <th><select class="tableInp" id="currencyInp" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);">
+        <option value="INR">INR</option>
+        <option value="USD">USD</option>
+        <option value="EURO">EURO</option>
+        </select></th>
+    </tr>
+
+    <tr>
+        <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Website status"/></th>
+        <th><select class="tableInp" id="websiteStatusInp" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);">
+        <option value="on">WE ARE OPEN</option>
+        <option value="off">WE ARE CLOSED</option>
+        </select></th>
+    </tr>
+
+    <tr>
+        <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Booking status"/></th>
+        <th><select class="tableInp" id="bookingStatusInp" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);">
+        <option value="on">BOOKING OPEN</option>
+        <option value="off">BOOKING CLOSED</option>
+        </select></th>
+    </tr>
+
+    <tr>
+        <th><input class="tableInp" style="background-color: rgba(255, 255, 255, 0);pointer-events: none;margin: 0px;color:rgba(0, 0, 0, 0);" value="Agent commission"/></th>
+        <th><input class="tableInp" id="saveGameBtn" type="button" onclick="saveGameSetting()" style="background-color:red;pointer-events: all;margin: 0px;color:white;" value="SAVE SETTINGS"/></th>
+    </tr>
+</table>
+
+
+
+<br><br><br>
+</div>
+
+
+
+
+<!-------------------------------audio record-->
+<br><br>
+<div class="gameSettingDiv">
+
+<div class="audioDiv">
+    <div class="audioTitleBtn" id="audioTitleTxt">VOICE ANNOUNCEMENT</div>
+<div class="audioBtnDiv">
+    <button class="audioBtn" id="recordBtn" onclick="recordAction()">RECORD</button>
+    <button class="audioBtn" id="announceBtn" disabled="true" style="opacity: 0.5;" onclick="uploadAudio()">ANNOUNCE</button>
+</div>
+</div>
+
+
+
+    </div>
+
+    <br><br>
+
+    <!----------------anouncement section-->
+    <div class="gameSettingDiv">
+        <button class="titleBtn" id="titleBtn">ANNOUNCEMENT TO PLAYERS</button>
+<textarea class="anounceTa" id="announceTa" placeholder="Write important announcement for your players">
+    Hellow everyone today game will be help on 9AM onward.
+</textarea>
+<br><br>
+<input class="tableInp" id="saveAnounceBtnInp" onclick="sendAnnouncement()" type="button" style="background-color:rgb(8, 122, 33);pointer-events: all;margin: 0px;color:rgb(255, 255, 255);margin-left: 25%;width: 50%;border-radius: 20px;" value="SEND NEW ANNOUNCEMENT"/>
+     <br><br>
+       </div>
+
+
+<!--------action button-->
+<br><br>
+<div class="gameSettingDiv">
+    <button class="titleBtn">ACTION BUTTON</button>
+<div class="actionBtnDiv">
+    <button class="actionBtn" id="resetCallBtn" onclick="resetCallNum()" >RESET CALL</button>
+    <button class="actionBtn" id="resetTicketBtn" onclick="resetTicket()">RESET TICKET</button>
+    <button class="actionBtn" id="resetAgentBtn" onclick="resetAgent()">RESET AGENT</button>
+    <button class="actionBtn" id="loadBackupTicketBtn" onclick="loadBackupTicket()">LOAD BACKUP TICKET</button>
+    <button class="actionBtn" id="showCurrentTktBtn" onclick="showCurrentTicket()">SHOW CURRENT TICKET</button>
+    <button class="actionBtn" id="showCurrentWinnerBtn" onclick="showCurrentWinner()">SHOW CURRENT WINNER</button>
+    <button class="actionBtn" id="showLastTicketBtn" onclick="showLastTicket()">SHOW PREVIOUS TICKET</button>
+    <button class="actionBtn" id="showLastWinnerBtn" onclick="showLastWinner()">SHOW PREVIOUS WINNER</button>
+    <button class="actionBtn" id="showLastNumBtn" onclick="showLastNum()">SHOW PREVIOUS NUMBER</button>
+    <button class="actionBtn" id="showLastBusinessBtn" onclick="showLastBusiness()">SHOW PREVIOUS BUSINESS</button>
+    <button class="actionBtn" id="showLastPayBtn" style="background: green;color:white;" onclick="checkLastPay()">SHOW LAST PAYMENT</button>
+</div>
+
+<br>
+    </div>
+
+
+<!-------------RUN GAME BUTTON-->
+<br><br>
+<div class="gameSettingDiv">
+    <button class="titleBtn" >START GAME CALLING</button>
+    <button class="runBtn" onclick='document.getElementById("runGameWindowDiv").style.display="block";' id="runGameBtn">
+        RUN GAME
+    </button>
+    <br><br>
+    </div>
+
+
+    
+
+
+<!---------------------------------------------------------divident list-->
+<br><br>
+<div class="gameSettingDiv">
+    <button class="titleBtn">DIVIDENT SETTINGS</button>
+
+    <table class="gameSettingTable">
+        <tr style="background: black;">
+            <th ><input class="tableInp" style="background-color: black;pointer-events: none;margin: 0px;color:white;" value="Divident type"/></th>
+            <th ><input class="tableInp" style="background-color: black;pointer-events: none;margin: 0px;color:white;" value="Prize amount"/></th>
+            <th style="width: 40px;"><input class="tableInp"  style="background-color:black;pointer-events: none;margin: 0px;color:white;" value="X"/></th>
+        </tr>
+    
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="First Full House"/></th>
+            <th><input class="tableInp" id="First Housefull PrizeInp" style="background-color: white;margin: 0px;color:rgb(0, 0, 0);" value="16000"/></th>
+            <th><input class="tableCheckbox" id="First Housefull" onchange="updateTotalHouseFull(1)" type="checkbox" checked style="background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Second Full House"/></th>
+            <th><input class="tableInp" id="Second Housefull PrizeInp" style="background-color: white;margin: 0px;color:rgb(0, 0, 0);" value="16000"/></th>
+            <th><input class="tableCheckbox" id="Second Housefull" onchange="updateTotalHouseFull(2)" type="checkbox" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Third Full House"/></th>
+            <th><input class="tableInp" id="Third Housefull PrizeInp" style="background-color: white;margin: 0px;color:rgb(0, 0, 0);" value="16000"/></th>
+            <th><input class="tableCheckbox" id="Third Housefull" onchange="updateTotalHouseFull(3)" type="checkbox" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Full Sheet Bonus"/></th>
+            <th><input class="tableInp" id="Full Sheet Bonus PrizeInp" style="background-color: white;margin: 0px;color:rgb(0, 0, 0);" value="16000"/></th>
+            <th><input class="tableCheckbox" id="Full Sheet Bonus" type="checkbox" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Half Sheet Bonus"/></th>
+            <th><input class="tableInp" id="Half Sheet Bonus PrizeInp" style="background-color: white;margin: 0px;color:rgb(0, 0, 0);" value="16000"/></th>
+            <th><input class="tableCheckbox" id="Half Sheet Bonus" type="checkbox" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Top Line"/></th>
+            <th><input class="tableInp" id="Top Line PrizeInp" style="background-color: white;margin: 0px;color:rgb(0, 0, 0);" value="16000"/></th>
+            <th><input class="tableCheckbox" id="Top Line" type="checkbox" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Middle Line"/></th>
+            <th><input class="tableInp" id="Middle Line PrizeInp" style="background-color: white;margin: 0px;color:rgb(0, 0, 0);" value="16000"/></th>
+            <th><input class="tableCheckbox" id="Middle Line" type="checkbox" style="background-color:rgb(196, 180, 180);pointer-events: all;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Bottom Line"/></th>
+            <th><input class="tableInp" id="Bottom Line PrizeInp" style="background-color: white;margin: 0px;color:rgb(0, 0, 0);" value="16000"/></th>
+            <th><input class="tableCheckbox" id="Bottom Line" type="checkbox" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Box Bonus"/></th>
+            <th><input class="tableInp" id="Box Bonus PrizeInp" style="background-color: white;margin: 0px;color:rgb(0, 0, 0);" value="16000"/></th>
+            <th><input class="tableCheckbox" id="Box Bonus" type="checkbox" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Corner"/></th>
+            <th><input class="tableInp" id="Corner PrizeInp" style="background-color: white;margin: 0px;color:rgb(0, 0, 0);" value="16000"/></th>
+            <th><input class="tableCheckbox" id="Corner" type="checkbox" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Star"/></th>
+            <th><input class="tableInp" id="Star PrizeInp" style="background-color: white;margin: 0px;color:rgb(0, 0, 0);" value="16000"/></th>
+            <th><input class="tableCheckbox" id="Star" type="checkbox" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Early 5"/></th>
+            <th><input class="tableInp" id="Early 5 PrizeInp" style="background-color: white;margin: 0px;color:rgb(0, 0, 0);" value="16000"/></th>
+            <th><input class="tableCheckbox" id="Early 5" type="checkbox" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Quick6"/></th>
+            <th><input class="tableInp" id="Quick6 PrizeInp" style="background-color: white;margin: 0px;color:rgb(0, 0, 0);" value="16000"/></th>
+            <th><input class="tableCheckbox" id="Quick6" type="checkbox" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Quick7"/></th>
+            <th><input class="tableInp" id="Quick7 PrizeInp" style="background-color: white;margin: 0px;color:rgb(0, 0, 0);" value="16000"/></th>
+            <th><input class="tableCheckbox" id="Quick7" type="checkbox" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);"/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" id="saveDividentBtn" onclick="saveDivident()" type="button" style="background-color:red;pointer-events: all;margin: 0px;color:rgb(255, 255, 255);" value="SAVE DIVIDENTS"/></th>
+            <th><input class="tableInp"  onclick='window.location="http://starttambola.com/printPoster/home.html?domain=www.jirpocoupon.com&amp;gameSettingJSON={"dateTime":"2024-07-21T18:00","totalTicket":"259","ticketPrice":"350","agentCommission":"10","currency":"INR","websiteStatus":"on","bookingStatus":"off","dateTime12F":"21-07-2024 06:00:00 PM"}&amp;dividentPrize=[{"name":"First Housefull","amount":"60,000 "},{"name":"Second Housefull","amount":"5,000"},{"name":"Bottom Line","amount":"3,000"},{"name":"Middle Line","amount":"3,000"},{"name":"Top Line","amount":"3,000"},{"name":"Star","amount":"3,000"},{"name":"Quick7","amount":"3,000"}]&amp;adminInfoJSON={"adminName":"Nirmal Tokbi ","adminPass":"Kanghon","adminEmail":"hanjangkuru@gmail.com","adminPhone":"9365102038","adminWpLink":"https://whatsapp.com"}";' type="button" style="background-color:black;display:block;pointer-events: all;margin: 0px;color:rgb(255, 255, 255);" value="MAKE POSTER"/></th>
+        </tr>
+        </table>
+        <br><br><br>
+    </div>
+
+    <!---------------------------link section-->
+    <br>
+    <div class="gameSettingDiv">
+        <button class="titleBtn" id="titleBtn">IMPORTANT LINKS</button>
+        <div class="linkDiv">
+            <input class="linkInp" id="playerLinkInp" placeholder="Player link"/>
+            <button class="linkBtn" id="adminLinkInp"  id="copy1btn" onclick="copy(1)">COPY LINK</button>
+            <button class="linkBtn" id="agentinkInp"  onclick="shareLink(1)"  style="background: green;margin-left: 5px;">SHARE LINK</button>
+        </div>
+        <br>
+        <div class="linkDiv">
+            <input class="linkInp" id="adminLink2Inp" placeholder="Admin link"/>
+            <button class="linkBtn" id="copy2btn" onclick="copy(2)">COPY LINK</button>
+            <button class="linkBtn" onclick="shareLink(2)" style="background: green;margin-left: 5px;">SHARE LINK</button>
+        </div>
+        <br>
+        <div class="linkDiv">
+            <input class="linkInp" id="agentLinkInp" placeholder="Agent link"/>
+            <button class="linkBtn" id="copy3btn" onclick="copy(3)">COPY LINK</button>
+            <button class="linkBtn" onclick="shareLink(3)" style="background: green;margin-left: 5px;">SHARE LINK</button>
+        </div>
+        <br>
+        </div>
+    <br>
+
+
+
+<!------------------------------------------------------finance and ticket info info-->
+<br><br>
+<div class="gameSettingDiv">
+    <button class="titleBtn">BUSINESS INFO</button>
+    
+    <table class="gameSettingTable">
+        <tr style="background: black;">
+            <th ><input class="tableInp" style="background-color: black;pointer-events: none;margin: 0px;color:white;" value="Settings type"/></th>
+            <th><input class="tableInp" style="background-color:black;pointer-events: none;margin: 0px;color:white;" value="Settings value"/></th>
+        </tr>
+    
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Total ticket"/></th>
+            <th><input class="tableInp" id="totalTicketInp2" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Total ticket booked"/></th>
+            <th><input class="tableInp" id="soldTicketInp" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Total haftsheet booked"/></th>
+            <th><input class="tableInp" id="haftsheetTicketInp" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Total fullsheet booked"/></th>
+            <th><input class="tableInp" id="fullsheetTicketInp" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Ticket left"/></th>
+            <th><input class="tableInp" id="leftTicketInp" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Ticket price"/></th>
+            <th><input class="tableInp" id="ticketPriceInp2" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Agent commission"/></th>
+            <th><input class="tableInp" id="agentCommissionInp2" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Total revenue"/></th>
+            <th><input class="tableInp" id="totalRevenueInp" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Total profit"/></th>
+            <th><input class="tableInp" id="totalProfitInp" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+
+</table>
+<br><br>
+</div>
+
+
+<!------------------------------------------------------admin info-->
+<br><br>
+<div class="gameSettingDiv">
+    <button class="titleBtn">ADMIN INFO</button>
+    
+    <table class="gameSettingTable">
+        <tr style="background: black;">
+            <th ><input class="tableInp" style="background-color: black;pointer-events: none;margin: 0px;color:white;" value="Settings type"/></th>
+            <th><input class="tableInp" style="background-color:black;pointer-events: none;margin: 0px;color:white;" value="Settings value"/></th>
+        </tr>
+    
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Admin name"/></th>
+            <th><input class="tableInp" id="adminNameInp" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Recovery email"/></th>
+            <th><input class="tableInp" id="adminEmailInp" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Admin phone"/></th>
+            <th><input class="tableInp" id="adminPhoneInp" type="number" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Whatsapp group link"/></th>
+            <th><input class="tableInp" id="adminWpLinkInp"  style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Admin password"/></th>
+            <th><input class="tableInp" id="adminPassInp" style="background-color:white;pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/></th>
+        </tr>
+
+
+        <tr>
+            <th><input class="tableInp" onclick="logout()" type="button" style="background-color: rgb(63, 63, 63);pointer-events: all;margin: 0px;color:rgba(0, 0, 0, 0);color:white;text-align: center;" value="LOG OUT"/></th>
+            <th><input class="tableInp" id="saveAdminInfoBtn" type="button" onclick="saveAdminInfo()" style="background-color:red;pointer-events: all;margin: 0px;color:white;" value="SAVE INFO"/></th>
+        </tr>
+
+        </table>
+
+        <br><br><br>
+</div>
+
+
+<!------------------------------------------------------admin info-->
+<br><br>
+<div class="gameSettingDiv">
+    <button class="titleBtn">LINK INFO</button>
+    
+    <table class="gameSettingTable">
+        <tr style="background: black;">
+            <th ><input class="tableInp" style="background-color: black;pointer-events: none;margin: 0px;color:white;" value="Data type"/></th>
+            <th><input class="tableInp" style="background-color:black;pointer-events: none;margin: 0px;color:white;" value="Data value"/></th>
+        </tr>
+    
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Host name"/></th>
+            <th><input class="tableInp" id="hostNameInp" style="background-color:white;pointer-events: none;margin: 0px;color:rgb(139, 118, 118);" value=""/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Creation date"/></th>
+            <th><input class="tableInp" id="createdDateInp" style="background-color:white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value=""/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" style="background-color: white;pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="Renew date"/></th>
+            <th><input class="tableInp" id="renewDateInp" style="background-color:white;pointer-events:none;margin: 0px;color:rgb(0, 0, 0);" value=""/></th>
+        </tr>
+
+        <tr>
+            <th><input class="tableInp" onclick="logout()" type="button" style="background-color: rgba(63, 63, 63, 0);pointer-events: none;margin: 0px;color:rgba(0, 0, 0, 0);color:white;text-align: center;" value=""/></th>
+            <th><input class="tableInp" id="renewBtn" type="button" onclick="renew()" style="background-color:red;pointer-events: all;margin: 0px;color:white;" value="RENEW NOW"/></th>
+        </tr>
+
+        </table>
+
+        <br><br><br>
+</div>
+
+
+
+<!---------------------------------------------------------ticket/agent list-->
+<br><br>
+<div class="gameSettingDiv">
+    <button class="titleBtn">TICKET/AGENT LIST</button>
+
+<div class="toggleDiv" style="display: grid;grid-template-columns: auto auto;width: 80%;margin-left: 10%;">
+    <button class="clickBtn" id="showTicketBtn" onclick='getSoldTicket("all","gameSettingTable")' style="background: red;">TICKET LIST</button>
+    <button class="clickBtn" id="showAgentBtn" onclick="getAgentList()" style="background: black;">AGENT LIST</button>
+</div>
+<br>
+<input class="searchInp"  placeholder="Enter keyword" id="searchKeyInp" onkeyup="searchKey(this.value)" style="text-align: center;"/>
+<br><br>
+    <table class="gameSettingTable" id="gameSettingTable">
+      
+<!----------------------------table list-->
+
+        </table>
+
+
+        <br><br><br>
+        </div>
+
+
+<!-------------THEMESTORE BUTTON-->
+<br><br>
+<div class="gameSettingDiv">
+    <button class="titleBtn" style="background: yellow;color:black;font-weight: bold;">INSTALL NEW DESIGN</button>
+  <button class="runBtn" onclick="themeStore()">
+        THEME STORE
+    </button>
+    <br><br>
+    </div>
+
+
+
+
+
+
+<!----------------------------------------------------------popup window-->
+
+
+<div class="popWin1" id="popWin1" style="display: none;">
+<div class="win1">
+
+    <input class="tableInp" type="button" id="popWin1XBtn" style="background:rgb(255, 255, 0,0);pointer-events: all;margin: 0px;color:white;font-size: 50px;margin-left:40%;" onclick='popWin1X()' value="X"/>
+    
+
+    <table class="gameSettingTable" id="editDataTable">
+
+     <!-------------------------dynamic content-->
+
+        </table>
+
+        <br><br>
+        <table class="gameSettingTable" id="agentTicketTable">
+
+            <!-------------------------dynamic content-->
+       
+       
+               </table>
+    <br><br><br>
+</div>
+</div>
+
+
+
+<!-----------run game window-->
+<div class="gamePopDiv" id="runGameWindowDiv" style="display: none;background: rgba(0, 0, 0, 0);">
+<div class="gameDiv" id="gameDiv" style="overflow-y: scroll;">
+
+    <table class="gameSettingTable">
+
+        <tr>
+            <th style="width: 10%;"></th>
+            <th ></th>
+            <th ></th>
+            <th style="width: 10%;"><input class="tableInp" type="button"  style="background:rgb(255, 255, 0,0);pointer-events: all;margin-left: 5%;color:white;font-size: 40px;" onclick='document.getElementById("runGameWindowDiv").style.display="none";' value="X"/></th>
+        </tr>
+
+        </table>
+
+
+    <button class="titleBtn">RUN GAME</button>
+    <button class="titleBtn" id="countDownBtn">10:20:0</button>
+
+    <table class="runGameTable">
+
+    <tr style="background: black;">
+        <th ><input class="tableInp" style="background-color: rgb(200, 200, 200);pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="CALLING STATUS"/></th>
+        <th ><select class="tableInp" id="callStatusInp"  style="background-color:rgb(255, 255, 255);pointer-events: all;margin: 0px;color:rgb(0, 0, 0);">
+        <option value="off">OFF</option>
+        <option value="on">ON</option>
+        </select></th>
+
+        <tr style="background: black;">
+            <th ><input class="tableInp" style="background-color: rgb(200, 200, 200);pointer-events: none;margin: 0px;color:rgb(0, 0, 0);" value="CALLING INTERVAL"/></th>
+            <th ><select class="tableInp" id="callIntervalInp" onchange="setCallInterval(this.value)" style="background-color:rgb(255, 255, 255);pointer-events: all;margin: 0px;color:rgb(0, 0, 0);">
+            <option value="12000">12s</option>
+            <option value="10000">10s</option>
+                <option value="8000">8s</option>
+            </select></th>
+
+    </tr>
+</table>
+
+<div class="numBlockDiv" id="numBlockDiv">
+    <!---------------------------------number block-->
+</div>
+
+
+<div class="dividentConDiv" id="dividentListDiv">
+    <!-------dynamic content-->
+</div>
+
+<br><br>
+</div>
+</div>
+
+
+
+
+
+
+<!---------------------------booking window-->
+<div class="gamePopDiv" id="bookingWindowDiv" style="display: none;background: rgba(0, 0, 0, 0);">
+  
+    <div class="gameDiv">
+        <input class="tableInp" type="button" id="popWin1XBtn" style="background:rgb(255, 255, 0,0);pointer-events: all;margin: 0px;color:white;font-size: 40px;margin-left:40%;position: absolute;" onclick='document.getElementById("bookingWindowDiv").style.display="none";' value="X"/>
+    
+        <button class="titleBtn">SELECT TICKET</button>
+        <br>
+        <div class="bookInpDiv">
+            <input class="tableInp" id="bookerNameInp" placeholder="Name"  style="background-color:rgb(255, 255, 255);pointer-events: nall;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/>
+            <input class="tableInp" id="bookerPhoneInp" placeholder="Phone"  style="background-color:rgb(255, 255, 255);pointer-events: all;margin: 0px;color:rgb(0, 0, 0);" onkeyup="filterChar(this.id)" value=""/>
+            </div>
+           <button class="smallTitleBtn">Random ticket</button>
+           <div class="btnConDiv" id="randomTktDiv">
+              <!---dynamic content-->
+           </div>
+           <button class="smallTitleBtn">Haftsheet ticket</button>
+           <div class="btnConDiv" id="haftsheetTktDiv">
+            <!--dynamic content-->
+           </div>
+           <button class="smallTitleBtn">Fullsheet ticket</button>
+           <div class="btnConDiv" id="fullsheetTktDiv">
+            <!--dynamic content-->
+           </div>
+           <br>
+        <div class="ticketBlockDiv" id="ticketBlockDiv">
+            <!-----------------dynamix content from getAllTicket()-->
+        </div>
+        <br>
+        <input class="bookBtn" type="button" id="booktBtn"  style="background-color:red;pointer-events: all;color:rgb(255, 255, 255);" onclick="book()" value="BOOK NOW"/>
+        <br>
+    </div>
+  
+</div>
+
+<!--------------------------------login window-->
+<div class="loginOverlayDiv" id="loginOverlayDiv" style="display: none;background: rgba(0, 0, 0, 0);">
+    <div class="loginInpCon">
+        <button class="titleBtn">Login</button>
+        <input class="agentInp" id="agentPassInp" placeholder="Admin pass"/>
+        <input class="agentInp" id="loginBtnInp" onclick="login()" value="SIGN IN" style="background: red;color:white;text-align: center;" type="button"/>
+    </div>
+    </div>
+<!----------------------------------------------------------popup window-->
+
+
+<!--------------------book btn-->
+<button class="bookFloatBtn" id="bookFloatBtn" onclick='document.getElementById("bookingWindowDiv").style.display="block";' style="display: block;">BOOK TICKET</button>
+
+
+<!------render-->
+<div class="gamePopDiv"  id="renderDiv"  style="display: none;background: rgba(0, 0, 0, 0);" >
+   
+    <div class="gameDiv" id="rDiv">
+        <input class="tableInp" type="button" id="popWin1XBtn" style="background:rgb(255, 255, 0,0);pointer-events: all;margin: 0px;color:white;font-size: 40px;margin-left:45%;position: absolute;" onclick='document.getElementById("renderDiv").style.display="none";' value="X"/>
+    
+        <button class="titleBtn" id="renderTitleBtn">LAST TICKET LIST</button>
+       
+    <div class="renderGridDiv" id="renderGridDiv" style="overflow-y: scroll;">
+       <!----dynamic content-->
+    </div>
+
+    <button class="renderBtn" id="downloadBtn" onclick='print()'>DOWNLOAD</button>
+</div>
+</div>
+
+
+
+
+
+<!--------------------------------------payment div-->
+<div class="payDiv" id="payDiv" style="display: none;">
+    <input class="tableInp" type="button" id="popWin1XBtn" style="background:rgb(255, 255, 0,0);pointer-events: all;margin: 0px;color:white;font-size: 40px;margin-left:45%;position: absolute;" onclick='document.getElementById("payDiv").style.display="none";' value="X"/>
+    <button class="titleBtn" id="renderTitleBtn">LAST PAYMENT DETAILS</button>
+
+    <button class="payInfoBtn" id="payInfoBtn">PAYMENT ATTEMPT 5,600Rs on 23-30-2022 10.21 AM</button>
+    <button class="payStatusBtn" id="payStatusBtn">PAYMENT INCOMPLETE</button>
+    <button class="payContinueBtn" id="completePayBtn" onclick="payAction()">COMPLETE  NOW</button>
+</div>
+
+
+
+<style>
+    .color{
+    color:rgb(0, 131, 219);
+}
+*{
+    outline: none;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+body{
+    background: fixed;
+    background-image: url("../imgAsset/wallpaper.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+   
+}
+.payDiv{
+    width: 50%;
+    height: 300px;
+    background: blue;
+    border-radius: 20px;
+    position: fixed;
+    z-index: 2;
+    margin-left: 25%;
+    top: 20px;
+    
+}
+.payInfoBtn{
+    width: 80%;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-left: 10%;
+    background: rgba(255, 255, 255, 0);
+    border:5px solid white;
+    border-style: dashed;
+    color:white;
+}
+.payStatusBtn{
+    width: 80%;
+    height: 100px;
+    font-size: 40px;
+    color: white;
+    background: red;
+    border-radius:10px ;
+    margin-left: 10%;
+    border:0px solid red;
+    margin-top: 10px;
+}
+.payContinueBtn{
+    width: 30%;
+    font-size: 15px;
+    color:black;
+    background: yellow;
+    margin-left: 35%;
+    margin-top: 10px;
+    height: 30px;
+    border-radius: 10px;
+    border:0px solid red;
+    font-weight: bold;
+}
+.renderGridDiv{
+    border:3px solid red;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    max-height: 80%;
+}
+.renderGridBtn{
+    border: 0px solid black;
+    color: black;
+    background: white;
+    font-size: 15px;
+}
+.renderBtn{
+    position: absolute;
+    font-size: 15px;
+    border:0px solid grey;
+    background: red;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+    width: 20%;
+    margin-left: 40%;
+    bottom: 20px;
+}
+.gameSettingDiv{
+    width: 80%;
+    background: rgb(11, 11, 114);
+    margin-left: 10%;
+}
+.titleBtn{
+    width: 100%;
+    border: 0px solid grey;
+    font-size: 25px;
+    padding: 10px;
+    color:white;
+    background: rgba(0,0,0,0);
+}
+.gameSettingTable{
+    width: 80%;
+    margin-left: 10%;
+}
+.tableInp{
+    width: 100%;
+    font-size: 15px;
+    padding: 10px;
+    border: 0px solid grey;
+    font-weight: bold;
+}
+.tableCheckbox{
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+}
+.clickBtn{
+    font-size: 20px;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    border: 0px solid grey;
+    margin:3px;
+}
+.popWin1{
+    position: fixed;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    top: 0px;
+    left:0px;
+    overflow-y:scroll;
+}
+.win1{
+    width: 80%;
+    background:blue;
+    margin-top: 30px;
+    margin-left:10%;
+    border-radius: 10px;
+
+}
+.gamePopDiv{
+    position: fixed;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    top: 0px;
+    left:0px;
+}
+
+.gameDiv{
+    position: fixed;
+    width: 80%;
+    background:blue;
+    margin-top: 10px;
+    margin-left:10%;
+    border-radius: 10px;
+height: 95%;
+}
+.numBlockDiv{
+    width: 50%;
+    margin-left: 25%;
+    border: 10px solid silver;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto ;
+
+}
+.numBtn{
+    font-size: 10px;
+}
+.bookInpDiv{
+    width: 80%;
+    margin-left: 10%;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.ticketBlockDiv{
+    width: 80%;
+    border:3px solid white;
+    margin-left: 10%;
+    border-radius: 3px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    overflow-y:scroll ;
+    max-height: 40%;
+}
+.ticketBlockBtn{
+    font-size: 15px;
+    padding: 5px;
+    background:white;
+    font-weight: bold;
+    border:2px solid silver;
+}
+.bookBtn{
+    width:80%;
+    font-size: 15px;
+    padding: 10px;
+    border: 0px solid grey;
+    font-weight: bold;
+    margin-left: 10%;
+}
+.runBtn{
+    width: 80%;
+    font-size: 40px;
+    font-weight: bold;
+    height: 100px;
+    border-radius: 10px;
+    background: red;
+    color:white;
+    margin-left: 10%;
+    margin-top: 10px;
+    border:0px solid grey;
+}
+.runGameTable{
+    width: 52%;
+    margin-left: 25%;
+}
+.loginOverlayDiv{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+}
+.loginInpCon{
+    width: 50%;
+    height: 50%;
+    background: rgb(0, 197, 223);
+    border: 10px solid rgb(12, 12, 202);
+    margin-left: 25%;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.agentInp{
+    width: 80%;
+    font-size: 18px;
+    padding: 10px;
+    border: 0px solid grey;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-left: 10%;
+}
+.bookFloatBtn{
+    font-size: 20px;
+    padding: 10px;
+    width: 200px;
+    border-radius: 10px;
+    position: fixed;
+    bottom: 10px;
+    border:0px solid grey;
+    background: red;
+    color:white;
+    right:10%;
+}
+.smallTitleBtn{
+    border: 0px solid grey;
+    background: rgba(0, 0, 0, 0);
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    margin-left: 10%;
+}
+.btnConDiv{
+    width: 80%;
+    border-radius: 20px;
+    border: 3px solid white;
+    margin-left: 10%;
+    overflow: auto;
+  white-space: nowrap;
+}
+.roundBtn{
+    border-radius: 15px;
+    width: 30px;
+    height: 30px;
+    font-size: 10px;
+    margin:3px;
+    background: white;
+    border: 0px solid grey;
+}
+
+.dividentConDiv{
+    width: 49.5%;
+    margin-left: 26.5%;
+}
+.dividentBtn{
+    width: 100%;
+    border:0px solid grey;
+    font-size: 20px;
+    padding: 10px;
+    margin-top: 5px;
+    background: yellow;
+    color: black;
+    font-weight: bold;
+}
+.searchInp{
+    width: 80%;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 10%;
+}
+.linkDiv{
+    width: 100%;
+}
+.linkInp{
+    width: 70%;
+    font-size: 15px;
+    height: 30px;
+    border-radius: 5px;
+    margin-left: 2%;
+}
+.linkBtn{
+    font-size: 15px;
+    color: white;
+    font-weight: bold;
+    background: red;
+    border: 10px;
+    height: 30px;
+}
+.anounceTa{
+    width: 80%;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    height: 100px;
+    margin-left: 10%;
+}
+.actionBtnDiv{
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+.actionBtn{
+    margin:5px;
+    background: red;
+    font-size: 15px;
+    color: white;
+    font-weight: bold;
+    height: 50px;
+    border-radius: 5px;
+    border:0px solid grey;
+}
+/*--------------------------audio------------*/
+.audioDiv{
+width: 100%;
+margin-left: 0%;
+height: 200px;
+border: 2px solid white;
+}
+.snailImg{
+    position: relative;
+    height: 100px;
+    margin-top: 40px;
+    filter: drop-shadow(0px 4px 10px rgb(0, 0, 0));
+}
+.audioTitleBtn{
+    font-size: 50px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    opacity: 0.5;
+    margin-top: 10px;
+    text-align: center;
+}
+.audioBtnDiv{
+    width: 20%;
+    margin-left: 40%;
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.audioBtn{
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    background: red;
+    margin:3px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 1000px) { /*----------------------------------------------------------------------*/
+    .payDiv{
+    width: 90%;
+    height: 600px;
+    background: blue;
+    border-radius: 20px;
+    position: fixed;
+    z-index: 2;
+    margin-left: 5%;
+    top: 20px;
+}
+.payInfoBtn{
+    width: 90%;
+    color: white;
+    font-weight: bold;
+    font-size: 35px;
+    border-radius: 20px;
+    padding: 20px;
+    margin-left: 5%;
+}
+.payStatusBtn{
+    width: 90%;
+    height: 300px;
+    font-size: 60px;
+    color: white;
+    background: red;
+    border-radius:10px ;
+    margin-left: 5%;
+    border:0px solid red;
+    margin-top: 10px;
+}
+.payContinueBtn{
+    width: 90%;
+    font-size: 35px;
+    color:black;
+    background: yellow;
+    margin-left: 5%;
+    margin-top: 10px;
+    height: 50px;
+    border-radius: 10px;
+    border:0px solid red;
+    font-weight: bold;
+}
+    .renderGridDiv{
+        max-height: 90%;
+    }
+    .renderGridBtn{
+    border: 0px solid black;
+    color: black;
+    background: white;
+    font-size: 35px;
+}
+    .gameSettingDiv{
+    width: 90%;
+    background: rgb(11, 11, 114);
+    margin-left: 5%;
+}
+.renderBtn{
+    position: absolute;
+    font-size: 45px;
+    border:0px solid grey;
+    background: red;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    width: 50%;
+    margin-left: 25%;
+    bottom: 20px;
+}
+.titleBtn{
+    width: 100%;
+    border: 0px solid grey;
+    font-size: 50px;
+    padding: 10px;
+    color:white;
+    background: rgba(0,0,0,0);
+}
+.gameSettingTable{
+    width: 90%;
+    margin-left: 5%;
+}
+.tableInp{
+    width: 100%;
+    font-size: 25px;
+    padding: 10px;
+    border: 0px solid grey;
+    font-weight: bold;
+}
+.tableCheckbox{
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+}
+.clickBtn{
+    font-size: 25px;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    border: 0px solid grey;
+    margin:3px;
+}
+.gameDiv{
+    position: fixed;
+    width: 100%;
+    background:blue;
+    margin-top: 30px;
+    margin-left:0%;
+    border-radius: 10px;
+
+}
+.numBlockDiv{
+    width: 80%;
+    margin-left: 10%;
+    border: 20px solid silver;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto ;
+
+}
+.numBtn{
+    font-size: 35px;
+}
+.ticketBlockDiv{
+    width: 90%;
+    border:3px solid white;
+    margin-left: 5%;
+    border-radius: 3px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    overflow-y:scroll ;
+    max-height: 60%;
+}
+.bookInpDiv{
+    width: 90%;
+    margin-left: 5%;
+    grid-template-columns: auto;
+}
+.ticketBlockBtn{
+    font-size: 30px;
+    padding: 10px;
+    background:white;
+    font-weight: bold;
+    border:2px solid silver;
+}
+.bookBtn{
+    width:90%;
+    font-size: 35px;
+    padding: 10px;
+    border: 0px solid grey;
+    font-weight: bold;
+    margin-left: 5%;
+}
+.runGameTable{
+    width: 85%;
+    margin-left: 10%;
+}
+.loginOverlayDiv{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+}
+.loginInpCon{
+    width: 80%;
+    height: 50%;
+    background: rgb(0, 197, 223);
+    border: 10px solid rgb(12, 12, 202);
+    margin-left: 10%;
+    border-radius: 30px;
+    margin-top: 20px;
+}
+.agentInp{
+    width: 80%;
+    font-size: 38px;
+    padding: 20px;
+    border: 0px solid grey;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-left: 10%;
+}
+.bookFloatBtn{
+    font-size: 40px;
+    padding: 20px;
+    width: 400px;
+    border-radius: 10px;
+    position: fixed;
+    bottom: 30px;
+    border:0px solid grey;
+    color:white;
+    right:5%;
+}
+.smallTitleBtn{
+    border: 0px solid grey;
+    background: rgba(0, 0, 0, 0);
+    font-size: 40px;
+    color: white;
+    font-weight: bold;
+    margin-left: 5%;
+}
+.btnConDiv{
+    width: 90%;
+    border-radius: 20px;
+    border: 3px solid white;
+    margin-left: 5%;
+}
+.roundBtn{
+    border-radius: 20px;
+    width: 90px;
+    height: 50px;
+    font-size: 35px;
+    margin:5px;
+    background: white;
+    border: 0px solid grey;
+}
+.dividentConDiv{
+    width: 80%;
+    margin-left: 12%;
+}
+.dividentBtn{
+    width: 100%;
+    border:0px solid grey;
+    font-size: 40px;
+    padding: 20px;
+    margin-top: 5px;
+    background: yellow;
+    color: black;
+    font-weight: bold;
+}
+.searchInp{
+    width: 80%;
+    font-size: 40px;
+    padding: 20px;
+    border-radius: 10px;
+    margin-left: 10%;
+}
+.linkInp{
+    width: 90%;
+    font-size: 35px;
+    height: 50px;
+    border-radius: 5px;
+    margin-left: 5%;
+}
+.linkBtn{
+    font-size: 25px;
+    color: white;
+    font-weight: bold;
+    background: red;
+    border: 10px;
+    height: 50px;
+    margin-left: 32%;
+    margin-top: 5px;
+}
+.anounceTa{
+    width: 80%;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    height: 300px;
+    margin-left: 10%;
+}
+.actionBtnDiv{
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.actionBtn{
+    margin:5px;
+    background: red;
+    font-size: 25px;
+    color: white;
+    font-weight: bold;
+    height: 100px;
+    border-radius: 5px;
+    border:0px solid grey;
+}
+/*--------------------------audio------------*/
+.audioDiv{
+width: 100%;
+margin-left: 0%;
+height: 300px;
+border: 5px solid white;
+}
+.snailImg{
+    position: relative;
+    height: 100px;
+    margin-top: 140px;
+    filter: drop-shadow(0px 4px 10px rgb(0, 0, 0));
+}
+.audioTitleBtn{
+    font-size: 50px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    opacity: 0.5;
+    margin-top: 30px;
+    text-align: center;
+}
+.audioBtnDiv{
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.audioBtn{
+    font-size: 30px;
+    padding: 20px;
+    border-radius: 15px;
+    color: white;
+    font-weight: bold;
+    background: red;
+    margin:3px;
+}
+
+
+
+
+
+}
+
+</style>
+
+
+
+
+
