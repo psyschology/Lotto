@@ -6,27 +6,78 @@
     <title>Daily Housie</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles for the dropdown */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        .login-dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content a {
+            display: block;
+            padding: 8px 16px;
+            color: #333;
+            text-decoration: none;
+        }
+        .dropdown-content a:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <div class="header-container">
-            <div class="header-content bg-gray-200 p-4 flex items-center space-x-4">
-                <h1 class="text-2xl font-bold">Daily Housie</h1>
-                <p class="text-lg">Next game starts at 2 PM</p>
-            </div>            
-            <div class="header-actions">
-                <div class="login-dropdown">
-                    <button id="loginBtn">Login</button>
-                    <div class="dropdown-content">
-                        <a href="#" id="agentLoginBtn">Agent</a>
-                        <a href="#" id="adminLoginBtn">Administrator</a>
+<body class="bg-gray-100">
+    <!-- Mobile Header -->
+    <header class="bg-gray-200 block md:hidden">
+        <div class="header-container mx-auto p-4 flex items-center justify-between">
+            <div class="header-content flex flex-col space-y-2">
+                <h1 class="text-xl sm:text-2xl md:text-3xl font-bold">Daily Housie</h1>
+                <p class="text-sm sm:text-lg md:text-xl">Next game starts at 2 PM</p>
+            </div>
+            <div class="header-actions flex flex-col space-y-2">
+                <div class="login-dropdown relative">
+                    <button id="loginBtn" class="image-button">
+                        <img src="./assets/images/login.png" alt="Login" class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14">
+                    </button>
+                    <div class="dropdown-content absolute right-0 mt-2 w-48">
+                        <a href="#" id="agentLoginBtn" class="block px-4 py-2">Agent</a>
+                        <a href="#" id="adminLoginBtn" class="block px-4 py-2">Administrator</a>
                     </div>
                 </div>
-                <button id="purchaseTicketsBtn">Purchase Tickets</button>
+                <button id="purchaseTicketsBtn" class="image-button">
+                    <img src="./assets/images/customer-service.png" alt="Purchase" class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14">
+                </button>
             </div>
         </div>
     </header>
 
+    <!-- Desktop Header -->
+    <header class="bg-gray-200 hidden md:block">
+        <div class="header-container mx-auto p-4 max-w-screen-lg flex flex-col md:flex-row items-center justify-between">
+            <div class="header-content flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
+                <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold">Daily Housie</h1>
+                <p class="text-sm sm:text-lg md:text-xl lg:text-2xl">Next game starts at 2 PM</p>
+            </div>
+            <div class="header-actions flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 mt-4 md:mt-0">
+                <div class="login-dropdown relative">
+                    <button id="loginBtn" class="image-button">
+                        <img src="./assets/images/login.png" alt="Login" class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14">
+                    </button>
+                    <div class="dropdown-content absolute right-0 mt-2 w-48">
+                        <a href="#" id="agentLoginBtn" class="block px-4 py-2">Agent</a>
+                        <a href="#" id="adminLoginBtn" class="block px-4 py-2">Administrator</a>
+                    </div>
+                </div>
+                <button id="purchaseTicketsBtn" class="image-button">
+                    <img src="./assets/images/customer-service.png" alt="Purchase" class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14">
+                </button>
+            </div>
+        </div>
+    </header>
     <main>
         <div class="announcement">
             <p>Tambola games are for entertainment purposes only. Ensure you understand the rules and regulations before playing.</p>
@@ -41,6 +92,10 @@
                 <p>Live Game Display</p>
             </div>
         </div>
+        <div id="number-display" style="display: none;">
+            <h2 id="display-number">Number: </h2>
+            <button onclick="callNumber()">Call Next Number</button>
+        </div>
 
         <div class="ticket-search">
             <input type="text" id="search-bar" placeholder="Search Ticket">
@@ -50,6 +105,24 @@
         <div class="tickets" id="tickets">
             <!-- Tickets will be dynamically generated here -->
         </div>
+
+        <!-- Agent View -->
+        <div class="agent-dashboard" style="display: none;">
+            <h2>Agent Dashboard</h2>
+            <button id="create-ticket-btn">Create New Ticket</button>
+            <button id="add-name-btn">Add Name to Ticket</button>
+            <!-- Include ticket management options -->
+        </div>
+
+        <!-- Admin View -->
+        <div class="admin-dashboard" style="display: none;">
+            <h2>Admin Dashboard</h2>
+            <button id="start-game-btn">Start Game</button>
+            <button id="create-award-btn">Create Award</button>
+            <button id="delete-award-btn">Delete Award</button>
+            <button id="extend-game-time-btn">Extend Game Time</button>
+            <!-- Include award management options -->
+        </div>
     </main>
 
     <!-- Agent Login Modal -->
@@ -57,7 +130,7 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal('agentModal')">&times;</span>
             <h2>Agent Login</h2>
-            <form>
+            <form id="agent-login-form">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username">
                 <label for="password">Password:</label>
@@ -72,7 +145,7 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal('adminModal')">&times;</span>
             <h2>Admin Login</h2>
-            <form>
+            <form id="admin-login-form">
                 <label for="adminUsername">Username:</label>
                 <input type="text" id="adminUsername" name="adminUsername">
                 <label for="adminPassword">Password:</label>
@@ -89,5 +162,7 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+<div class="elfsight-app-b45aa2f0-3c89-4bde-9e37-9ad536aa406b" data-elfsight-app-lazy></div>
 </body>
 </html>
