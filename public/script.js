@@ -1,5 +1,5 @@
-// Initialization and Ticket generation
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialization and Ticket generation
     const ticketsContainer = document.getElementById('tickets');
     const ticketCount = 300;
 
@@ -65,14 +65,134 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return column;
     }
-});
 
-// Random Number generator and speech synthesesiser
+    // Countdown Timer
+    const countdownTimer = document.getElementById('countdown-timer');
+    const gameStartTime = new Date();
+    gameStartTime.setHours(14, 0, 0); // Adjust to game start time
+
+    function updateCountdown() {
+        const now = new Date();
+        const timeLeft = gameStartTime - now;
+
+        if (timeLeft <= 0) {
+            countdownTimer.textContent = "00:00:00";
+        } else {
+            const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            countdownTimer.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+    }
+
+    setInterval(updateCountdown, 1000);
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const users = {
+            agent: { username: 'agent123', password: 'agentpass' },
+            admin: { username: 'admin123', password: 'adminpass' }
+        };
+    
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+    
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+    
+        // Dropdown button event
+        document.getElementById('loginBtn').addEventListener('click', function (event) {
+            event.preventDefault();
+            const dropdownContent = this.nextElementSibling;
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        });
+    
+        // Agent login button event
+        document.getElementById('agentLoginBtn').addEventListener('click', function (event) {
+            event.preventDefault();
+            closeModal('adminModal');
+            openModal('agentModal');
+        });
+    
+        // Admin login button event
+        document.getElementById('adminLoginBtn').addEventListener('click', function (event) {
+            event.preventDefault();
+            closeModal('agentModal');
+            openModal('adminModal');
+        });
+    
+        // Close modal event
+        document.querySelectorAll('.close').forEach(function (element) {
+            element.addEventListener('click', function () {
+                closeModal('agentModal');
+                closeModal('adminModal');
+            });
+        });
+    
+        // Close modal on outside click
+        window.addEventListener('click', function (event) {
+            if (event.target.classList.contains('modal')) {
+                closeModal('agentModal');
+                closeModal('adminModal');
+            }
+        });
+    
+        // User Login Handling
+        document.getElementById('agent-login-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const username = document.getElementById('agent-username').value;
+            const password = document.getElementById('agent-password').value;
+    
+            if (username === users.agent.username && password === users.agent.password) {
+                sessionStorage.setItem('userRole', 'agent');
+                closeModal('agentModal');
+                showAgentView();
+            } else {
+                alert('Invalid Agent credentials');
+            }
+        });
+    
+        document.getElementById('admin-login-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const username = document.getElementById('admin-username').value;
+            const password = document.getElementById('admin-password').value;
+    
+            if (username === users.admin.username && password === users.admin.password) {
+                sessionStorage.setItem('userRole', 'admin');
+                closeModal('adminModal');
+                showAdminView();
+            } else {
+                alert('Invalid Administrator credentials');
+            }
+        });
+    
+        function showAgentView() {
+            document.querySelector('.agent-dashboard').style.display = 'block';
+            document.querySelector('.admin-dashboard').style.display = 'none';
+        }
+    
+        function showAdminView() {
+            document.querySelector('.admin-dashboard').style.display = 'block';
+            document.querySelector('.agent-dashboard').style.display = 'none';
+        }
+    
+        const userRole = sessionStorage.getItem('userRole');
+        if (userRole === 'agent') {
+            showAgentView();
+        } else if (userRole === 'admin') {
+            showAdminView();
+        }
+    });
+    
+
+// Random Number generator and speech synthesizer
 class RandomNumberGenerator {
     constructor() {
         this.calledNumbers = new Set();
         this.min = 1;
-        this.max = 75;
+        this.max = 90; // Correct max to 90
     }
 
     generateNumber() {
@@ -94,8 +214,8 @@ function speakNumber(number) {
     const utterance = new SpeechSynthesisUtterance(`Number ${number}`);
     window.speechSynthesis.speak(utterance);
 }
-// Game controls
 
+// Game controls
 let isGameStarted = false;
 const rng = new RandomNumberGenerator();
 
@@ -119,142 +239,7 @@ function callNumber() {
 document.getElementById('start-game-btn').addEventListener('click', startGame);
 document.querySelector('#number-display button').addEventListener('click', callNumber);
 
-// Countdown Timer
-
-const countdownTimer = document.getElementById('countdown-timer');
-const gameStartTime = new Date();
-gameStartTime.setHours(14, 0, 0); // Adjust to game start time
-
-function updateCountdown() {
-    const now = new Date();
-    const timeLeft = gameStartTime - now;
-
-    if (timeLeft <= 0) {
-        countdownTimer.textContent = "00:00:00";
-    } else {
-        const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-        countdownTimer.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }
-}
-
-setInterval(updateCountdown, 1000);
-
-// Modal Management
-
-// Open modal
-function openModal(modalId) {
-    document.getElementById(modalId).style.display = 'block';
-}
-
-// Close modal
-function closeModal(modalId) {
-    document.getElementById(modalId).style.display = 'none';
-}
-
-// Event listeners for login buttons
-document.getElementById('loginBtn').addEventListener('click', function() {
-    openModal('agentModal');
-});
-document.getElementById('agentLoginBtn').addEventListener('click', function() {
-    openModal('agentModal');
-});
-document.getElementById('adminLoginBtn').addEventListener('click', function() {
-    openModal('adminModal');
-});
-
-// Event listeners for close buttons in modals
-document.querySelectorAll('.close').forEach(function(element) {
-    element.addEventListener('click', function() {
-        closeModal('agentModal');
-        closeModal('adminModal');
-    });
-});
-
-// Close modal when clicking outside of modal content
-window.addEventListener('click', function(event) {
-    if (event.target.classList.contains('modal')) {
-        closeModal('agentModal');
-        closeModal('adminModal');
-    }
-});
-
-// User Login
-
-document.addEventListener('DOMContentLoaded', () => {
-    const agentLoginForm = document.getElementById('agent-login-form');
-    const adminLoginForm = document.getElementById('admin-login-form');
-
-    agentLoginForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const username = document.getElementById('agent-username').value;
-        const password = document.getElementById('agent-password').value;
-
-        fetch('/login/agent', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                sessionStorage.setItem('userRole', 'agent');
-                sessionStorage.setItem('username', username);
-                closeModal('agentModal');
-                showAgentView();
-            } else {
-                alert(data.message);
-            }
-        });
-    });
-
-    adminLoginForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const username = document.getElementById('admin-username').value;
-        const password = document.getElementById('admin-password').value;
-
-        fetch('/login/admin', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                sessionStorage.setItem('userRole', 'admin');
-                sessionStorage.setItem('username', username);
-                closeModal('adminModal');
-                showAdminView();
-            } else {
-                alert(data.message);
-            }
-        });
-    });
-
-    function showAgentView() {
-        document.querySelector('.agent-dashboard').style.display = 'block';
-        document.querySelector('.admin-dashboard').style.display = 'none';
-    }
-
-    function showAdminView() {
-        document.querySelector('.admin-dashboard').style.display = 'block';
-        document.querySelector('.agent-dashboard').style.display = 'none';
-    }
-
-    const userRole = sessionStorage.getItem('userRole');
-    if (userRole === 'agent') {
-        showAgentView();
-    } else if (userRole === 'admin') {
-        showAdminView();
-    }
-});
-
-
 // Game and award management
-
-// Agent functionalities
 document.getElementById('create-ticket-btn').addEventListener('click', () => {
     fetch('/create-ticket', {
         method: 'POST',
@@ -271,34 +256,11 @@ document.getElementById('create-ticket-btn').addEventListener('click', () => {
     });
 });
 
-document.getElementById('add-name-btn').addEventListener('click', () => {
-    const ticketId = prompt('Enter ticket ID:');
-    const playerName = prompt('Enter player name:');
-
-    fetch('/add-name', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ticketId, playerName })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Name added successfully!');
-        } else {
-            alert(data.message);
-        }
-    });
-});
-
-// Admin functionalities
-document.getElementById('start-game-btn').addEventListener('click', startGame);
 document.getElementById('create-award-btn').addEventListener('click', () => {
-    const awardName = prompt('Enter award name:');
-
     fetch('/create-award', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ awardName })
+        body: JSON.stringify({ /* Add necessary data */ })
     })
     .then(response => response.json())
     .then(data => {
@@ -310,20 +272,19 @@ document.getElementById('create-award-btn').addEventListener('click', () => {
     });
 });
 
-document.getElementById('delete-award-btn').addEventListener('click', () => {
-    const awardId = prompt('Enter award ID:');
-
-    fetch('/delete-award', {
+document.getElementById('end-game-btn').addEventListener('click', () => {
+    fetch('/end-game', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ awardId })
+        body: JSON.stringify({ /* Add necessary data */ })
     })
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            alert('Award deleted successfully!');
+            alert('Game ended successfully!');
         } else {
             alert(data.message);
         }
     });
 });
+})
