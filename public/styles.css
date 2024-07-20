@@ -249,7 +249,7 @@ main {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto;
+    margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
@@ -282,6 +282,7 @@ main {
 .close:focus {
     color: #ff0000;
     text-decoration: none;
+    cursor: pointer;
 }
 
 form {
@@ -328,4 +329,46 @@ form button:hover {
 
 .agent-dashboard.active, .admin-dashboard.active {
     display: block;
+}
+
+#game-board {
+    display: none; /* Initially hidden */
+    /* Add your styles here */
+}
+
+.number-display {
+    font-size: 2rem;
+    margin: 1rem 0;
+}
+
+.board .grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 0.5rem;
+}
+
+.board .number {
+    padding: 1rem;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+
+.board .number.marked {
+    background-color: #ffeb3b;
+}
+
+.award-status {
+    margin-top: 2rem;
+}
+
+.award-status table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.award-status table th,
+.award-status table td {
+    padding: 0.5rem;
+    text-align: left;
+    border: 1px solid #ddd;
 }
